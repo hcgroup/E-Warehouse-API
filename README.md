@@ -403,7 +403,7 @@ POST /api/Products
       "SKU": "S-0000000005",
       "ArticleCode": "ART-50000"
       "isSlaveProduct": true,
-      "MasterProductID": 5000100
+      "MasterProductID": 5000100,
       "hasMinimumStock": false,
       "isCombinationProduct":false
    },
