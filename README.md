@@ -220,32 +220,32 @@ VOORBEELD:
 POST /api/Orders
 [
     {
-        "Reference":"ORDER REF #1000000",
-        "ShopID":10001,
+        "Reference": "ORDER REF #1000000",
+        "ShopID": 10001,
         "OrderReceiver": {
-            "Name":"T Visser",
-            "CompanyName":"HCGroup",
-            "Address":"Graafschaphornelaan 137A",
-            "PostalCode":"6001  AC",
-            "City":"Weert",
-            "Country":"NL",
-            "PhoneNumber":"+31 (0)495 788 118",
-            "EmailAddress":"t.visser@hcgroup.nl"
+            "Name": "T Visser",
+            "CompanyName": "HCGroup",
+            "Address": "Graafschaphornelaan 137A",
+            "PostalCode": "6001  AC",
+            "City": "Weert",
+            "Country": "NL",
+            "PhoneNumber": "+31 (0)495 788 118",
+            "EmailAddress": "t.visser@hcgroup.nl"
         },
-        "OrderDetails":[
+        "OrderDetails": [
             {
-                "ProductID":5000100,
-                "Quantity":10,
-                "isReversed":false,
-                "Remark":"De velden ProductID en Quantity zijn verplicht, isReversed en Remark zijn optioneel."
+                "ProductID": 5000100,
+                "Quantity": 10,
+                "isReversed": false,
+                "Remark":" De velden ProductID en Quantity zijn verplicht, isReversed en Remark zijn optioneel."
             },
             {
-                "ProductID":5000200,
-                "Quantity":20
+                "ProductID": 5000200,
+                "Quantity": 20
             }
         ],
-        "Remark":"Order automatisch aangelegd door SEOShop.",
-        "CustomerReference":"ORD20200"
+        "Remark": "Order automatisch aangelegd door de API.",
+        "CustomerReference": "ORD20200"
     }
 ]
 ```
