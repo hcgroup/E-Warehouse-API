@@ -404,39 +404,39 @@ VOORBEELD:
 POST /api/Products
 [
    {
-      "ShopID":10001,
-      "Name":"Nieuw Simpel Product",
-      "Description":"Recent toegevoegd product. Volledig nieuw in de collectie.",
-      "VATType":"High",
-      "CustomID":"CSTM 10500",
-      "Measurement":{
-         "Weight":200,
+      "ShopID": 10001,
+      "Name": "Nieuw Simpel Product",
+      "Description": "Recent toegevoegd product. Volledig nieuw in de collectie.",
+      "VATType": "High",
+      "CustomID": "CSTM 10500",
+      "Measurement": {
+         "Weight": 200,
          "Width":120,
          "Height":120,
          "Depth":60
       },
-      "Barcode":"",
-      "EAN":"E-0012300001",
-      "SKU":"S-0041900001",
-      "ArticleCode":"ART-70000",
+      "Barcode": "",
+      "EAN": "E-0012300001",
+      "SKU": "S-0041900001",
+      "ArticleCode": "ART-70000",
       "isSlaveProduct": false,
       "hasMinimumStock": true,
       "MinimumStock": 10,
       "isCombinationProduct":false
    },
    {
-      "ShopID":10001,
-      "Name":"Nieuw Slave Product",
-      "Description":"Een groot test product.",
-      "VATType":"High",
+      "ShopID": 10001,
+      "Name": "Nieuw Slave Product",
+      "Description": "Een groot test product.",
+      "VATType": "High",
       "CustomID": "CSTM 20000",
-      "Measurement":{
+      "Measurement": {
          "Weight":0,
          "Width":0,
          "Height":0,
          "Depth":0
       },
-      "Barcode":"",
+      "Barcode": "",
       "EAN": "E-0000000005",
       "SKU": "S-0000000005",
       "ArticleCode": "ART-50000"
@@ -446,32 +446,32 @@ POST /api/Products
       "isCombinationProduct":false
    },
    {
-      "ShopID":10001,
-      "Name":"Nieuw Combi Product",
-      "Description":"Recent toegevoegd Combi Product.",
-      "VATType":"High",
-      "CustomID":"CSTM 10520",
-      "Measurement":{
+      "ShopID": 10001,
+      "Name": "Nieuw Combi Product",
+      "Description": "Recent toegevoegd Combi Product.",
+      "VATType": "High",
+      "CustomID": "CSTM 10520",
+      "Measurement": {
          "Weight":0,
          "Width":0,
          "Height":0,
          "Depth":0
       },
-      "Barcode":"",
-      "EAN":"E-0033300001",
-      "SKU":"S-0046900001",
-      "ArticleCode":"ART-80000",
+      "Barcode": "",
+      "EAN": "E-0033300001",
+      "SKU": "S-0046900001",
+      "ArticleCode": "ART-80000",
       "isSlaveProduct": false,
       "hasMinimumStock": false,
       "isCombinationProduct":true,
       "CombinationOfProducts":[
          {
-            "ProductID":5000100,
-            "AmountOfProduct":1
+            "ProductID": 5000100,
+            "AmountOfProduct": 1
          },
          {
-            "ProductID":5000200,
-            "AmountOfProduct":5
+            "ProductID": 5000200,
+            "AmountOfProduct": 5
          }
       ]
    }
