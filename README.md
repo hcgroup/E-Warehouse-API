@@ -478,3 +478,122 @@ POST /api/Products
 ]
 ```
 Het aanpassen van artikelen en het toevoegen van nieuwe kan samen in bulk gedaan worden. 
+
+## Retouren
+Het is mogelijk om alle retour-aanvragen in te zien, met de bijbehorende data. Deze zijn op dit moment niet aanpasbaar, maar zijn wel volledig uitleesbaar. De retourregels worden aan een retour toegevoegd wanneer de retour-producten fysiek zijn ontvangen.
+
+### `GET` Retour opvragen
+Een enkele retour kan aangevraagd worden doormiddel van een `GET` request, naar de URL met het Retour-Id.
+```JSON
+VOORBEELD:
+GET /api/Returns/50000100
+```
+
+```JSON
+VOORBEELD RESPONSE:
+{
+  "Status": "success",
+  "StatusCode": 200,
+  "Description": "Successfully requested order-return #50000100",
+  "Content": {
+    "ReturnID": 50000100,
+    "OrderID": 200000200,
+    "ReturnDate": "2016-07-24T00:00:00",
+    "isPickReturn": false,
+    "Reason": "Niet naar verwachting",
+    "Remark": "geweigerd",
+    "Location": {
+      "Country": "NL"
+    },
+    "Status": "Verwerkt en Retour Voorraad",
+    "ReturnDetails": [
+      {
+        "ProductID": 5000100,
+        "Amount": 10,
+        "Status": "Terug op Voorraad"
+      }
+    ],
+    "WarehousingDate": "2016-07-25T00:00:00",
+    "TrackAndTrace": ""
+  }
+}
+```
+
+### `GET` Retours opvragen
+Ook een Bulk aan retours kan worden opgevraagd door een `GET` request. Hierbij kan worden gepagineerd door de variabelen `offset` te gebruiken. Ook kan de hoeveelheid resultaten worden gewijzigd doormiddel van de parameter `count` (_zie het voorbeeld voor de implementatie van beide_)
+```JSON
+VOORBEELD:
+GET /api/Returns?count=3&offset=15
+```
+
+```JSON
+VOORBEELD RESPONSE:
+{
+  "Status": "success",
+  "StatusCode": 200,
+  "Description": "Successfully requested returns. Total of 3 return(s) found.",
+  "Content": [
+    {
+      "ReturnID": 50000105,
+      "OrderID": 200000210,
+      "ReturnDate": "2016-07-24T00:00:00",
+      "isPickReturn": false,
+      "Reason": "Niet naar verwachting",
+      "Remark": "",
+      "Location": {
+        "Country": "NL"
+      },
+      "Status": "Verwerkt en Retour Voorraad",
+      "ReturnDetails": [
+        {
+          "ProductID": 5000100,
+          "Amount": 10,
+          "Status": "Terug op Voorraad"
+        },
+        {
+          "ProductID": 5000200,
+          "Amount": 5,
+          "Status": "Terug op Voorraad"
+        }
+      ],
+      "WarehousingDate": "2016-07-25T00:00:00",
+      "TrackAndTrace": ""
+    },
+    {
+      "ReturnID": 50000104,
+      "OrderID": 200000205,
+      "ReturnDate": "2016-07-24T00:00:00",
+      "isPickReturn": false,
+      "Reason": "Niet naar verwachting",
+      "Remark": "Amazon Retour",
+      "Location": {
+        "Country": "NL"
+      },
+      "Status": "Verwerkt en Retour Voorraad",
+      "ReturnDetails": [
+        {
+          "ProductID": 5000100,
+          "Amount": 10,
+          "Status": "Terug op Voorraad"
+        }
+      ],
+      "WarehousingDate": "2016-07-25T00:00:00",
+      "TrackAndTrace": ""
+    },
+    {
+      "ReturnID": 50000103,
+      "OrderID": 200000200,
+      "ReturnDate": "2016-07-23T00:00:00",
+      "isPickReturn": false,
+      "Reason": "Niet naar verwachting",
+      "Remark": "Via E-warehouse aangemaakt zonder label",
+      "Location": {
+        "Country": "NL"
+      },
+      "Status": "Verwerkt en Retour Voorraad",
+      "WarehousingDate": "1900-01-01T00:00:00",
+      "TrackAndTrace": ""
+    }
+  ]
+}
+```
