@@ -61,17 +61,18 @@ VOORBEELD RESPONSE:
     "Description": "Successfully requested order #200100000.",
     "Content": {
         "OrderID": 200100000,
+        "ShopID":10001,
         "CustomerID": 10001,
         "Reference": "WS 10000000",
         "DateTime": "2016-07-02T12:00:00",
         "OrderReceiver": {
             "Name": "T Visser",
-            "CompanyName": "",
+            "CompanyName": "HCGroup",
             "Address": "Graafschaphornelaan 137A",
             "PostalCode": "6001  AC",
             "City": "Weert",
             "Country": "NL",
-            "PhoneNumber": "",
+            "PhoneNumber": "+31 (0)495 788 118",
             "EmailAddress": "t.visser@hcgroup.nl"
         },
         "ExpectedDelivery": "2016-07-04T00:00:00",
@@ -114,7 +115,6 @@ VOORBEELD RESPONSE:
             "Description": "Afgerond",
             "Progress": 100
         },
-        "ProcessedBy": 0,
         "Remark": "Order automatisch aangelegd door SEOShop.",
         "CustomerReference": "ORD20200",
         "TrackAndTraceURL": "",
@@ -155,12 +155,12 @@ POST /api/Orders
         "OrderID": 200100000,
         "OrderReceiver": {
             "Name": "T Visser",
-            "CompanyName": "",
+            "CompanyName": "HCGroup",
             "Address": "Graafschaphornelaan 137A",
             "PostalCode": "6001  AC",
             "City": "Weert",
             "Country": "NL",
-            "PhoneNumber": "",
+            "PhoneNumber": "+31 (0)495 788 118",
             "EmailAddress": "t.visser@hcgroup.nl"
         },
         "OrderDetails": [
@@ -189,12 +189,12 @@ POST /api/Orders
         "OrderID": 200100001,
         "OrderReceiver": {
             "Name": "T Visser",
-            "CompanyName": "",
-            "Address": "Graafschaphornelaan 137A",
-            "PostalCode": "6001  AC",
+            "CompanyName": "HCGroup",
+            "Address": "Maaspoort 268",
+            "PostalCode": "6001 BN",
             "City": "Weert",
             "Country": "NL",
-            "PhoneNumber": "",
+            "PhoneNumber": "+31 (0)495 788 118",
             "EmailAddress": "t.visser@hcgroup.nl"
         },
         "Remark": "Ontvanger is verhuisd."
@@ -211,6 +211,44 @@ Een aantal punten om rekening mee te houden bij het aanpassen van een order:
 - Het is niet mogelijk om OrderDetails definitief te verwijderen, het is echter wel mogelijk de OrderDetail te storneren. **LET OP:** Wanneer een OrderDetail gestorneerd is is het niet mogelijk dit om dit om te draaien.
 
 Het eerste Order-Object in het voorbeeld bevat alle aanpasbare velden.
+
+### `POST` Orders aanmaken
+Orders kunnen aangemaakt worden door een Order-object zónder ID te voorzien. Deze kunnen in bulk geleverd worden. Hierbij zijn de volgende velden vereist: `ShopID`, `OrderReceiver`, `OrderDetails` (_Hierbij is tenminste 1 OrderDetail verplicht_). Orders kunnen (_op dit moment_) niet verwijderd worden. Wel kunnen alle artikelen binnen een Order gestorneerd worden. In het voorbeeld zijn alle velden terug te zien.
+
+```json
+VOORBEELD:
+POST /api/Orders
+[
+    {
+        "Reference":"ORDER REF #1000000",
+        "ShopID":10001,
+        "OrderReceiver": {
+            "Name":"T Visser",
+            "CompanyName":"HCGroup",
+            "Address":"Graafschaphornelaan 137A",
+            "PostalCode":"6001  AC",
+            "City":"Weert",
+            "Country":"NL",
+            "PhoneNumber":"+31 (0)495 788 118",
+            "EmailAddress":"t.visser@hcgroup.nl"
+        },
+        "OrderDetails":[
+            {
+                "ProductID":5000100,
+                "Quantity":10,
+                "isReversed":false,
+                "Remark":"De velden ProductID en Quantity zijn verplicht, isReversed en Remark zijn optioneel."
+            },
+            {
+                "ProductID":5000200,
+                "Quantity":20
+            }
+        ],
+        "Remark":"Order automatisch aangelegd door SEOShop.",
+        "CustomerReference":"ORD20200"
+    }
+]
+```
 
 ## Stock
 De voorraad van producten worden geheel verwerkt en gemodereerd door het E-warehouse systeem. De voorraad kan echter wel uitgelezen worden.
