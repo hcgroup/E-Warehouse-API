@@ -250,7 +250,7 @@ POST /api/Orders
 ]
 ```
 
-## Stock
+## Voorraad
 De voorraad van producten worden geheel verwerkt en gemodereerd door het E-warehouse systeem. De voorraad kan echter wel uitgelezen worden.
 
 ### `GET` Stock opvragen
@@ -553,7 +553,7 @@ Het aanpassen van artikelen en het toevoegen van nieuwe kan samen in bulk gedaan
 ## Retouren
 Het is mogelijk om alle retour-aanvragen in te zien, met de bijbehorende data. Deze zijn op dit moment niet aanpasbaar, maar zijn wel volledig uitleesbaar. De retourregels worden aan een retour toegevoegd wanneer de retour-producten fysiek zijn ontvangen.
 
-### `GET` Retour opvragen
+### `GET` Return opvragen
 Een enkele retour kan aangevraagd worden doormiddel van een `GET` request, naar de URL met het Retour-Id.
 ```JSON
 VOORBEELD:
@@ -590,7 +590,7 @@ VOORBEELD RESPONSE:
 }
 ```
 
-### `GET` Retours opvragen
+### `GET` Returns opvragen
 Ook een Bulk aan retours kan worden opgevraagd door een `GET` request. Hierbij kan worden gepagineerd door de variabelen `offset` te gebruiken. Ook kan de hoeveelheid resultaten worden gewijzigd doormiddel van de parameter `count` (_zie het voorbeeld voor de implementatie van beide_)
 ```JSON
 VOORBEELD:
