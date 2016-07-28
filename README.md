@@ -273,6 +273,52 @@ VOORBEELD RESPONSE:
 }
 ```
 
+### `GET` Stock (bulk) opvragen
+Een grote hoeveelheid stockdata aanvragen is mogelijk door een `GET`-request te sturen naar /api/Stock. Hierbij worden de meest recent-toegevoegde producten teruggegeven met hun Stock.
+```JSON
+VOORBEELD:
+GET /api/Stock?count=5&offset=20
+```
+
+Het is ook mogelijk om bepaalde argumenten mee te geven tijdens het opvragen van bulk-Stock:
+```JSON
+VOORBEELD RESPONSE:
+{
+  "Status": "success",
+  "StatusCode": 200,
+  "Description": "Successfully requested stock-data.",
+  "Content": [
+    {
+      "ProductID": 5000000,
+      "StockAmount": 12
+    },
+    {
+      "ProductID": 5000001,
+      "StockAmount": 48
+    },
+    {
+      "ProductID": 5000002,
+      "StockAmount": 32
+    },
+    {
+      "ProductID": 5000003,
+      "StockAmount": 311
+    },
+    {
+      "ProductID": 5000004,
+      "StockAmount": 0
+    }
+  ]
+}
+```
+| ARGUMENTS          | |
+| -------------:    |:-------------|
+| `count`          | The amount of products to retrieve. (Max: 500) |
+| `offset`       | Used for paging products, skips to the specified index       |
+| `sku`       | Search for products with specified SKU       |
+| `ean`       | Search for products with specified EAN       |
+| `articlecode`       | Search for products with specified ArticleCode       |
+
 ## Products
 Ook is het mogelijk om bepaalde data van producten aan te passen en op te vragen. Producten zijn alle fysiek-aanwezige producten in het warehouse. 
 
@@ -330,7 +376,7 @@ GET /api/Products
 Het is ook mogelijk om bepaalde argumenten mee te geven tijdens het opvragen van bulk-Producten:
 ```JSON
 VOORBEELD:
-GET /api/Orders?count=100&offset=500&sku=SKU-7081
+GET /api/Products?count=100&offset=500&sku=SKU-7081
 ```
 | ARGUMENTS          | |
 | -------------:    |:-------------|
