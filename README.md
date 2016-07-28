@@ -146,7 +146,7 @@ GET /api/Orders?count=20&offset=60&status=4
 ### `POST` Orders aanpassen
 Bij het updaten van orders is het maar mogelijk om bepaalde velden te updaten wanneer de order een bepaalde status nog niet bereikt heeft. Zo is het natuurlijk niet mogelijk om de geadresseerde aan te passen wanneer de order al verzonden is. 
 
-Bij het updaten wordt een `array` van Order-objecten verwacht. Bij ieder Order-object is het verplicht een `OrderID` mee te geven, aangezien deze refereerd naar het aan-te-passen order. 
+Bij het updaten wordt een `array` van Order-objecten verwacht. Bij ieder Order-object is het verplicht een `OrderID` mee te geven, aangezien deze refereerd naar het aan-te-passen order. Het aanpassen van `OrderReceiver` data kan alleen wanneer de `Status.Progress` zich onder de 40% bevindt. Het aanpassen van `OrderDetails` data kan alleen wanneer de `Status.Progress` zich onder de 10% bevindt.
 ```json
 VOORBEELD:
 POST /api/Orders
@@ -208,7 +208,7 @@ Een aantal punten om rekening mee te houden bij het aanpassen van een order:
 
 - Een nieuwe OrderDetail kan aangelegd worden door een ander ProductID te gebruiken.
 
-- Het is niet mogelijk om OrderDetails definitief te verwijderen, het is echter wel mogelijk de OrderDetail te storneren. **LET OP:** Wanneer een OrderDetail gestorneerd is is het niet mogelijk dit om dit om te draaien.
+- Het is niet mogelijk om OrderDetails definitief te verwijderen, het is echter wel mogelijk de OrderDetail te storneren.
 
 Het eerste Order-Object in het voorbeeld bevat alle aanpasbare velden.
 
@@ -341,7 +341,7 @@ GET /api/Orders?count=100&offset=500&sku=SKU-7081
 | `articlecode`       | Search for products with specified ArticleCode       |
 
 ### `POST` Products aanpassen
-Het aanpassen van producten biedt relatief meer mogelijkheden dan bijvoorbeeld het aanpassen van een order. In de voorbeeld `POST` worden alle verschillende aan-te-passen velden gebruikt in het *eerste voorbeeld*. Let wel op dat het van belang is een ProductID te gebruiken, aangezien deze dient te refereren naar het product.
+Het aanpassen van producten biedt relatief meer mogelijkheden dan bijvoorbeeld het aanpassen van een order. In de voorbeeld `POST` worden alle verschillende aan-te-passen velden gebruikt in het *eerste voorbeeld*, behalve de implementatie van CombinationOfProducts, aangezien een slave-product niet zowel een combination-product kan zijn. Let wel op dat het van belang is een ProductID te gebruiken, aangezien deze dient te refereren naar het product.
 ```JSON
 VOORBEELD:
 POST /api/Products
@@ -361,13 +361,29 @@ POST /api/Products
         "Barcode": "8181818181",
         "EAN": "E-0000000005",
         "SKU": "S-0000000005",
-        "ArticleCode": "ART-50000"
+        "ArticleCode": "ART-50000",
+        "isSlaveProduct": true,
+        "MasterProductID": 5000150,
+        "hasMinimumStock": true,
+        "MinimumStock": 20,
+        "isCombinationProduct": false
     }, 
     {
         "ProductID": 5000200,
-        "Name": "Veel Groter Test Product",
+        "Name": "Combinatie-product",
         "EAN": "E-0000000010",
-        "ArticleCode": "ART-60000"
+        "ArticleCode": "ART-60000",
+        "isCombinationProduct": true,
+        "CombinationOfProducts": [
+            {
+                "ProductID": 5000220,
+                "AmountOfProduct": 5
+            },
+            {
+                "ProductID": 5000240,
+                "AmountOfProduct": 10
+            }
+        ]
     }, 
     {
         "ProductID": 5000300,
@@ -396,6 +412,12 @@ POST /api/Products
 | `EAN` | The EAN code of the product|
 | `SKU` | The SKU code of the product|
 | `ArticleCode` | The article-code of the product|
+| `isSlaveProduct` | Is the product a slave product. If `isSlaveProduct` is `true`, the parameter `MasterProductID` is required to successfully update the product|
+| `MasterProductID` | The Id of the Master-product. `isSlaveProduct` needs to be set to `true` to update this field|
+| `hasMinimumStock` | Select if the product needs to send a warning when the product reaches a specific amount. If `hasMinimumStock` is `true`, the parameter `MinimumStock` is required to successfully update the product|
+| `isCombinationProduct` | Select if this product is seen as a combination-product. If `isCombinationProduct` is `true`, the object-parameter `CombinationOfProducts` needs to include atleast a single valid object|
+| `CombinationOfProducts` | An object-array of all products in the combination, with their corresponding amounts (_see the second example for valid implementation_)|
+
 
 ### `POST` Products aanmaken
 Producten kunnen aangemaakt worden door een Product-object zónder ID te voorzien. Deze kunnen in bulk geleverd worden. Let er wel op dat wanneer er een syntax/error bij een van de objecten is, hij er géén zal toevoegen (alleen bij een compleet succesvolle transactie worden alle objecten daadwerkelijk aangemaakt). In het voorbeeld ziet u de 3 verschillende producten terug (*Simpel-, Combinatie- en Slaveproducten*).
