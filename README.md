@@ -415,8 +415,11 @@ POST /api/Products
 | `isSlaveProduct` | Is the product a slave product. If `isSlaveProduct` is `true`, the parameter `MasterProductID` is required to successfully update the product|
 | `MasterProductID` | The Id of the Master-product. `isSlaveProduct` needs to be set to `true` to update this field|
 | `hasMinimumStock` | Select if the product needs to send a warning when the product reaches a specific amount. If `hasMinimumStock` is `true`, the parameter `MinimumStock` is required to successfully update the product|
+| `MinimumStock` | The product's minimum stock. `hasMinimumStock` needs to be set to `true` to update this field|
 | `isCombinationProduct` | Select if this product is seen as a combination-product. If `isCombinationProduct` is `true`, the object-parameter `CombinationOfProducts` needs to include atleast a single valid object|
 | `CombinationOfProducts` | An object-array of all products in the combination, with their corresponding amounts (_see the second example for valid implementation_)|
+
+**LET OP:** Het aanpassen van de velden `isSlaveProduct`, `MasterProductID`, `hasMinimumStock`, `MinimumStock`, `isCombinationProduct` en `CombinationOfProducts` kan alleen wanneer het product zelf geen voorraad heeft. Hierbij wordt puur gekeken naar het product met dat Id, dus de voorraad van combinatieproducten en slaveproducten is standaard 0 aangezien deze voorraad wordt bepaald door een ander product.
 
 
 ### `POST` Products aanmaken
