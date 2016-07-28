@@ -21,7 +21,7 @@ POST /api/Authentication
 ```
 `Timestamp` bestaat uit een DateTime waarde van de huidige tijd. Deze dient vervolgens ook gebruikt en meegegeven te worden in de `Hash`. Een voorbeeld van een 'op deze manier geformateerde DateTime' is: `#07/23/2016 12:00:00 AM#`.
 
-De variabele `Hash` bestaat uit een combinatie van de meegeven `Timestamp`, uw Customer-ID (*het **10000** nummer na de 100- dat u ingeeft bij het inloggen op E-warehouse*), uw gebruikersnaam en uw wachtwoord. Er wordt hierbij geen gebruik gemaakt van koppeltekens of spaties als seperatie tussen de variabelen, ze zijn dus opvolgend. Deze variabelenreeks dient ge-MD5 hashed te worden en daarna geconverteerd naar een `Base64 String`- dit resultaat wordt dan meegestuurd als variabelen `Hash`. Een voorbeeld van een niet-gehashde string is: `#7/4/2016 12:00:00 AM#10001api.creatorveiligheid2016` naar `KhaPn/NENjCgqy68PVpgnA==`.
+De variabele `Hash` bestaat uit een combinatie van de meegeven `Timestamp`, uw Customer-ID (*het **10000** nummer na de 100- dat u ingeeft bij het inloggen op E-warehouse*), uw gebruikersnaam en uw wachtwoord. Er wordt hierbij **géén** gebruik gemaakt van koppeltekens of spaties als seperatie tussen de variabelen, ze zijn dus opvolgend. Deze variabelenreeks dient ge-MD5 hashed te worden en daarna geconverteerd naar een `Base64 String`- dit resultaat wordt dan meegestuurd als variabelen `Hash`. Een voorbeeld van een niet-gehashde string is: `#7/4/2016 12:00:00 AM#10001api.creatorveiligheid2016` naar `KhaPn/NENjCgqy68PVpgnA==`.
 ```json
 VOORBEELD RESPONSE:
 {
