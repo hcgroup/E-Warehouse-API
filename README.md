@@ -19,9 +19,9 @@ POST /api/Authentication
     "Hash": "SAr3vZ2/ehmyqnMElIzZtQ=="
 }
 ```
-`Timestamp` bestaat uit een DateTime waarde van de huidige tijd. Deze dient vervolgens ook gebruikt en meegegeven te worden in de `Hash`. Een voorbeeld van een 'op deze manier geformateerde DateTime' is: `7/23/2016 15:00:00`.
+`Timestamp` bestaat uit een DateTime waarde van de huidige tijd. Deze dient vervolgens ook gebruikt en meegegeven te worden in de `Hash`. Een voorbeeld van een 'op deze manier geformateerde DateTime' is: `7-23-2016 15:00:00`.
 
-De variabele `Hash` bestaat uit een combinatie van de meegegeven `Timestamp`, uw Customer-ID (*het **10000** nummer na de 100- dat u ingeeft bij het inloggen op E-warehouse*), uw gebruikersnaam en uw wachtwoord. Er wordt hierbij **géén** gebruik gemaakt van koppeltekens of spaties als seperatie tussen de variabelen, ze zijn dus opvolgend. Deze variabelenreeks dient ge-MD5 hashed (_naar binaire MD5_) te worden en daarna geconverteerd naar een `Base64 String`- dit resultaat wordt dan meegestuurd als variabelen `Hash`. Een voorbeeld van een niet-gehashde string is: `7/23/2016 15:00:0010001api.creatorveiligheid2016` naar `SAr3vZ2/ehmyqnMElIzZtQ==`.
+De variabele `Hash` bestaat uit een combinatie van de meegegeven `Timestamp`, uw Customer-ID (*het **10000** nummer na de 100- dat u ingeeft bij het inloggen op E-warehouse*), uw gebruikersnaam en uw wachtwoord. Er wordt hierbij **géén** gebruik gemaakt van koppeltekens of spaties als seperatie tussen de variabelen, ze zijn dus opvolgend. Deze variabelenreeks dient ge-MD5 hashed (_naar binaire MD5_) te worden en daarna geconverteerd naar een `Base64 String`- dit resultaat wordt dan meegestuurd als variabelen `Hash`. Een voorbeeld van een niet-gehashde string is: `7-23-2016 15:00:0010001api.creatorveiligheid2016` naar `aBsMlEbpOKthHjqKiq+W/g==`.
 ```json
 VOORBEELD RESPONSE:
 {
@@ -31,7 +31,7 @@ VOORBEELD RESPONSE:
     "Content": {
         "UserId": 800,
         "Timestamp": "2016-07-23T15:00:00",
-        "Hash": "SAr3vZ2/ehmyqnMElIzZtQ==",
+        "Hash": "aBsMlEbpOKthHjqKiq+W/g==",
         "ValidationKey": "ef481695-4f8f-4b0e-ad19-70fb498c4e44"
     }
 }
